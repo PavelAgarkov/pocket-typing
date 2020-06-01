@@ -6,25 +6,29 @@ require __DIR__ . '/vendor/autoload.php';
 
 use SRC\ObjectArray;
 
-$obj = new ObjectArray("string", "integer");
+$obj = new ObjectArray("integer", "object");
 
-//$arr = new ObjectArray("integer", "integer");
+//$obj = new ObjectArray("integer", "object");
+
+//$obj = new ObjectArray("integer", "string");
+
+//$obj = new ObjectArray("string", "string");
+
+$arr = new ObjectArray("integer", "integer");
 
 $f = new ArrayObject();
 
-$obj->insert(1.2, 's1');
-$obj->insert(3, 's2');
-var_dump($obj);
+$obj->insert($f);
+$obj->insert($f);
 
+//$obj->insert($f);
+//$obj->insert($f);
 
-//$obj->append(1, 'sf');
-//$obj->append(1, "sg1");
-//$obj->append(1, "sg2");
-//$obj->append(1, "sg3");
-//$obj->append(1, "sg4");
-//$obj->append(1);
-//$obj->append(1);
-//$obj->append("12");
+//$obj->insert("fd");
+//$obj->insert("3f");
+
+//$obj->insert("3f", 'e3');
+//$obj->insert("3f", 'e4');
+var_dump($obj->array);
 
 // если передать два разным массива то они запишутся и ошибки не будет. нужна проверка по уровням и полям
-//var_dump($obj);

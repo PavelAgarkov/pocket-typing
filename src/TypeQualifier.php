@@ -98,10 +98,32 @@ class TypeQualifier
     public function validation($value, $index, $type, $indexType): void
     {
         if (!$this->compareValueType($value)) {
-            throw new \Exception("Созданный массив не может записать переданный тип {$type} 
-            так как объект создан для типа {$this->valueType}");
+            throw new \Exception("Созданный массив не может записать переданный тип {$type} так как объект создан для типа {$this->valueType}");
         }
 
         $this->Finder->getArrType()->validation($value, $index, $type, $indexType, $this);
+    }
+
+    public function insertInArrayObject(ObjectArray $Array, $value, $index): void
+    {
+        $class = get_class($value);
+
+        if ($this->getTypeObj($Array) == $class) //если тип объекта массива равен типу передаваемого значения
+        {
+            $this->Finder->getArrType()->insert($Array, $value, $index);
+
+        } else //если тип объекта массива не равен типу передаваемого значения то исключение
+        {
+            throw new \Exception("Тип данных массива {$this->getTypeObj($Array)} не соответствует добавляемым {$class}");
+        }
+    }
+
+    public function insertInArrayOtherValues(ObjectArray $Array, $value, $index, $type): void
+    {
+        if ($this->getTypeValue() == $type) //если тип передаваемого значения равен типу элемента массива
+        {
+            $this->Finder->getArrType()->insert($Array, $value, $index);
+        }
+
     }
 }

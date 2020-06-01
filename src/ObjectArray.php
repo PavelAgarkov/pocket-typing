@@ -25,7 +25,6 @@ class ObjectArray
         try {
             $type = gettype($value);
             $indexType = gettype($index);
-
             $this->Qualifier->validation($value, $index, $type, $indexType);
 
             //проверка объектом на соответствие типа аргумента переданного в параметрах и типа массива
@@ -35,23 +34,11 @@ class ObjectArray
             }
             else if ($type == 'object' && !empty($this->array)) //если передаваемое значение объект и если массив не пуст
             {
-                $class = get_class($value);
-                if ($this->Qualifier->getTypeObj($this) == $class) //если тип объекта массива равен типу передаваемого значения
-                {
-                    $this->Qualifier->Finder->getArrType()->insert($this, $value, $index);
-
-                } else //если тип объекта массива не равен типу передаваемого значения то исключение
-                {
-                    throw new \Exception("Тип данных массива {$this->Qualifier->getTypeObj($this)} 
-                не соответствует добавляемым {$class}");
-                }
+                $this->Qualifier->insertInArrayObject($this, $value, $index);
 
             } else if ($type != 'object' && !empty($this->array)) // если передаваемое значение не объект
             {
-                if ($this->Qualifier->getTypeValue() == $type) //если тип передаваемого значения равен типу элемента массива
-                {
-                    $this->Qualifier->Finder->getArrType()->insert($this, $value, $index);
-                }
+                $this->Qualifier->insertInArrayOtherValues($this, $value, $index, $type);
             }
 
         } catch (\Exception $exception) {
