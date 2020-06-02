@@ -2,6 +2,7 @@
 
 namespace SRC\TYPES;
 
+use SRC\ObjectArray;
 use SRC\TYPES\HashTable;
 use SRC\TYPES\Type;
 use SRC\TYPES\Vector;
@@ -12,16 +13,16 @@ class TypeFinder
 
     public Type $Type;
 
-    public function __construct(string $type)
+    public function __construct(string $type, ObjectArray $Array)
     {
         $this->type = $type;
 
         switch ($this->type) {
             case 'integer' :
-                $this->Type = new Vector();
+                $this->Type = new Vector($Array);
                 break;
             case 'string' :
-                $this->Type = new HashTable();
+                $this->Type = new HashTable($Array);
                 break;
         }
 
