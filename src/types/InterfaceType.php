@@ -1,9 +1,9 @@
 <?php
 
-namespace SRC\TYPES;
+namespace src\types;
 
-use SRC\ObjectArray;
-use SRC\TypeQualifier;
+use src\ObjectArray;
+use src\TypeQualifier;
 
 interface InterfaceType
 {

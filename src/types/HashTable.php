@@ -1,10 +1,10 @@
 <?php
 
-namespace SRC\TYPES;
+namespace src\types;
 
-use SRC\ASSOCIATE\AssociateArray;
-use SRC\ObjectArray;
-use SRC\TypeQualifier;
+use src\associate\AssociateArray;
+use src\ObjectArray;
+use src\TypeQualifier;
 
 class HashTable extends Type
 {

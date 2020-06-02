@@ -1,10 +1,10 @@
 <?php
 
-namespace SRC\TYPES;
+namespace src\types;
 
 use ArrayObject;
-use SRC\ObjectArray;
-use SRC\TypeQualifier;
+use src\ObjectArray;
+use src\TypeQualifier;
 
 class Vector extends Type
 {

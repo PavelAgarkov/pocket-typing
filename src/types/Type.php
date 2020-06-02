@@ -1,10 +1,10 @@
 <?php
 
-namespace SRC\TYPES;
+namespace src\types;
 
-use SRC\ObjectArray;
-use SRC\TypeQualifier;
-use SRC\TYPES\InterfaceType;
+use src\ObjectArray;
+use src\TypeQualifier;
+use src\types\InterfaceType;
 
 abstract class Type implements InterfaceType
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace SRC;
+namespace src;
 
-use SRC\TYPES\TypeFinder;
-use SRC\TYPES\Vector;
+use src\types\TypeFinder;
+use src\types\Vector;
 
 class TypeQualifier
 {

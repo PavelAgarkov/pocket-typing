@@ -1,11 +1,11 @@
 <?php
 
-namespace SRC\TYPES;
+namespace src\types;
 
-use SRC\ObjectArray;
-use SRC\TYPES\HashTable;
-use SRC\TYPES\Type;
-use SRC\TYPES\Vector;
+use src\ObjectArray;
+use src\types\HashTable;
+use src\types\Type;
+use src\types\Vector;
 
 class TypeFinder
 {

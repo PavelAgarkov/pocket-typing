@@ -1,6 +1,6 @@
 <?php
 
-namespace SRC\ASSOCIATE;
+namespace src\ASSOCIATE;
 
 class AssociateArray
 {

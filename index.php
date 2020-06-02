@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 require __DIR__ . '/vendor/autoload.php';
 
-use SRC\ObjectArray;
+use src\ObjectArray;
 
 $obj = new ObjectArray("integer", "object");
 
