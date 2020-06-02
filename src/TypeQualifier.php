@@ -70,9 +70,9 @@ class TypeQualifier
     public function getTypeObj(ObjectArray $Array): ?string
     {
         $class = null;
-        if (!$Array->Qualifier->Finder->getArrType()->isEmpty()) {
+//        if (!$Array->Qualifier->Finder->getArrType()->isEmpty()) {
             $class = get_class($Array->Qualifier->Finder->getArrType()->getFirstElement());
-        }
+//        }
         return $class;
 
     }

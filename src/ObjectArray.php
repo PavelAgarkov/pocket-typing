@@ -54,6 +54,6 @@ class ObjectArray
 
     public function getAsAnArray(): ?array
     {
-        return $this->Qualifier->Finder->Type->getAsArray($this);
+        return $this->Qualifier->Finder->getArrType()->getAsArray($this);
     }
 }

@@ -34,5 +34,4 @@ class AssociateArray
         return current(get_object_vars($this->AssociateList));
     }
 
-
 }
