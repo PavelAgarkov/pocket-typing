@@ -11,11 +11,13 @@ interface InterfaceType
 
     public function validation($value, $index, $type, $indexType, TypeQualifier $Qualifier): void;
 
-    public function delete($index): void;
+    public function delete($index): ?object;
 
     public function getAsArray(): ?array;
 
     public function isEmpty(): ?bool;
 
     public function getFirstElement(): ?object;
+
+    public function offsetExist($index): ?bool;
 }

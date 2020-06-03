@@ -4,6 +4,8 @@ namespace src;
 
 use src\types\TypeFinder;
 use src\types\Vector;
+use src\exceptions\QualifierConstructException;
+use src\exceptions\QualifierInsertException;
 
 class TypeQualifier
 {
@@ -39,7 +41,7 @@ class TypeQualifier
             if (in_array($indexType, static::TYPES_FOR_INDEX)) {
                 $this->indexType = $indexType;
             } else {
-                throw new \Exception("Тип создаваемого индекса {$indexType} не соответствует возможныму");
+                throw new QualifierConstructException("Тип создаваемого индекса {$indexType} не соответствует возможныму");
             }
 
             //проверка типа значения из возможных
@@ -49,7 +51,7 @@ class TypeQualifier
                 $this->valueType = $valueType;
                 $this->objType = get_class($valueType);
             } else {
-                throw new \Exception("Тип создаваемого значения {$valueType} не соответствует возможныму");
+                throw new QualifierConstructException("Тип создаваемого значения {$valueType} не соответствует возможныму");
             }
 
         } catch (\Exception $exception) {
@@ -70,9 +72,8 @@ class TypeQualifier
     public function getTypeObj(ObjectArray $Array): ?string
     {
         $class = null;
-//        if (!$Array->Qualifier->Finder->getArrType()->isEmpty()) {
-            $class = get_class($Array->Qualifier->Finder->getArrType()->getFirstElement());
-//        }
+        $class = get_class($Array->Qualifier->Finder->getArrType()->getFirstElement());
+
         return $class;
 
     }
@@ -95,10 +96,10 @@ class TypeQualifier
         } else return false;
     }
 
-    public function validation($value, $index, $type, $indexType): void
+    public function validationInsert($value, $index, $type, $indexType): void
     {
         if (!$this->compareValueType($value)) {
-            throw new \Exception("Созданный массив не может записать переданный тип значения {$type} так как объект массива создан для типа {$this->valueType}");
+            throw new QualifierInsertException("Созданный массив не может записать переданный тип значения {$type} так как объект массива создан для типа {$this->valueType}");
         }
 
         $this->Finder->getArrType()->validation($value, $index, $type, $indexType, $this);
@@ -114,7 +115,7 @@ class TypeQualifier
 
         } else //если тип объекта массива не равен типу передаваемого значения то исключение
         {
-            throw new \Exception("Тип данных объекта массива {$this->getTypeObj($Array)} не соответствует переданным {$class}");
+            throw new QualifierInsertException("Тип данных объекта массива {$this->getTypeObj($Array)} не соответствует переданным {$class}");
         }
     }
 

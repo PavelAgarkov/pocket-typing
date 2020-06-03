@@ -3,6 +3,7 @@
 namespace src\types;
 
 use src\associate\AssociateArray;
+use src\exceptions\AssociateArrayKeyException;
 use src\ObjectArray;
 use src\TypeQualifier;
 
@@ -23,12 +24,18 @@ class HashTable extends Type
     public function validation($value, $index, $type, $indexType, TypeQualifier $Qualifier): void
     {
         if ($Qualifier->compareIndexType($index) === false || is_null($Qualifier->compareIndexType($index))) {
-            throw new \Exception("Созданный массив не может записать индекс переданного типа {$indexType} так как объект создан для типа индекса {$Qualifier->indexType}");
+            throw new AssociateArrayKeyException("Созданный массив не может записать индекс переданного типа {$indexType} так как объект создан для типа индекса {$Qualifier->indexType}");
         }
     }
 
-    public function delete($index): void
+    public function delete($index): ?object
     {
+        if(gettype($index) == 'string') {
+            $this->Object->offsetUnset($index);
+            return $this;
+        } else {
+            throw new AssociateArrayKeyException('Для удаления по индексу необходимо использовать тип передаваемого значения string');
+        }
 
     }
 
@@ -47,5 +54,14 @@ class HashTable extends Type
     public function getFirstElement(): ?object
     {
         return $this->Object->getFirst();
+    }
+
+    public function offsetExist($index): ?bool
+    {
+        if(gettype($index) == 'string') {
+            return $this->Object->offsetExists($index);
+        } else {
+            throw new AssociateArrayKeyException('Для нахождения элемента по индексу необходимо использовать тип передаваемого значения string');
+        }
     }
 }
