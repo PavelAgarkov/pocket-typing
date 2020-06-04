@@ -11,6 +11,12 @@ $obj = new ObjectArray("integer", "object");
 
 $arr1 = new ObjectArray("string", "array");
 
+$bool = new ObjectArray('integer', 'boolean');
+
+$bool->insert(true);
+
+print_r($bool->Array);
+
 $f = new AssociateArray();
 
 $arr1->insert([1,23,4], "s1");
@@ -55,7 +61,7 @@ $obj->insert($f);
 
 //$obj->insert("3f", 'e3');
 //$obj->insert("3f", 'e4');
-print_r($arr1->Array);
-print_r($obj->Array);
+//print_r($arr1->Array);
+//print_r($obj->Array);
 
 // если передать два разным массива то они запишутся и ошибки не будет. нужна проверка по уровням и полям

@@ -9,14 +9,15 @@ class ExceptionMessages
         'qualifier' => [
 
             'construct' => [
-                'indexType'             => 'Тип создаваемого индекса |*| не соответствует возможному',
-                'valueType'             => 'Тип создаваемого значения |*| не соответствует возможныму'
+                'indexType'             => '!!  Type of index to create |*| does not match the possible !!',
+                'valueType'             => '!!  Type of value to be created |*| not appropriate !!'
             ],
 
             'insert' => [
-                'valueObjectType'       => "Созданный массив не может записать переданный тип значения |*| так как объект массива создан для типа |*|",
-                'valueInsertObjectType' => "Тип данных объекта массива |*| не соответствует переданным |*|"
+                'valueObjectType'       => '!!  The created array cannot write the passed value type |*| since an array object is created for type |*| !!',
+                'valueInsertObjectType' => '!!  Array Object Data Type |*| does not match transferred |*|  !!'
             ]
+
         ],
 
         'vector' => [],
@@ -24,11 +25,12 @@ class ExceptionMessages
         'hashTable' => [],
 
         'common' => [
-            'indexExist'                => 'В ключах массива нет переданного аргумента',
-            'insertIndexType'           => 'Созданный массив не может записать индекс переданного типа |*| так как объект создан для типа индекса |*|',
-            'deleteIndexType'           => 'Для удаления по индексу необходимо использовать тип integer передаваемого значения, используется |*|',
-            'existIndexType'            => 'Для нахождения элемента по индексу необходимо использовать тип передаваемого значения |*|'
+            'indexExist'                => '!!  Array keys have no argument passed  !!',
+            'insertIndexType'           => '!!  The created array cannot write the index of the passed type |*| since the object was created for the index type |*| !!',
+            'deleteIndexType'           => '!!  To delete by index, it is necessary to use the integer type of the transmitted value |*|  !!',
+            'existIndexType'            => '!!  To find an element by index, you must use the type of the transmitted value |*| !!'
         ]
+
     ];
 
     public static function parse(array $args, string $exceptionName): ?string
