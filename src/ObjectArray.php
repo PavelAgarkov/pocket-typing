@@ -14,9 +14,9 @@ class ObjectArray
 
     public function __construct(string $indexType = "integer", string $valueType)
     {
-        $this->Qualifier = new TypeQualifier($indexType, $valueType, $this);
-
         $this->ExceptionHandler = new ExceptionHandler();
+
+        $this->Qualifier = new TypeQualifier($indexType, $valueType, $this);
     }
 
     public function insert($value = null, $index = null): ?object
@@ -32,14 +32,15 @@ class ObjectArray
         //проверка объектом на соответствие типа аргумента переданного в параметрах и типа массива
         if ($this->Qualifier->Finder->getArrType()->isEmpty()) //если массив пуст
         {
-            $this->Qualifier->Finder->getArrType()->insert($this, $value, $index);
+            $this->Qualifier->Finder->getArrType()->insert($value, $index);
+
         } else if ($type == 'object' && !$this->Qualifier->Finder->getArrType()->isEmpty()) //если передаваемое значение объект и если массив не пуст
         {
             $this->Qualifier->insertInArrayObject($this, $value, $index);
 
         } else if ($type != 'object' && !$this->Qualifier->Finder->getArrType()->isEmpty()) // если передаваемое значение не объект
         {
-            $this->Qualifier->insertInArrayOtherValues($this, $value, $index, $type);
+            $this->Qualifier->insertInArrayOtherValues($value, $index, $type);
         }
         return $this;
     }
@@ -57,5 +58,15 @@ class ObjectArray
     public function keyExist($index): ?bool
     {
         return $this->Qualifier->Finder->getArrType()->offsetExist($index);
+    }
+
+    public function count(): ?int
+    {
+        return $this->Qualifier->Finder->getArrType()->count();
+    }
+
+    public function getValueByKey($key)
+    {
+        return $this->Qualifier->Finder->getArrType()->valueByKey($key);
     }
 }

@@ -4,6 +4,7 @@ namespace src\types;
 
 use src\associate\AssociateArray;
 use src\exceptions\AssociateArrayKeyException;
+use src\exceptions\ExceptionMessages;
 use src\ObjectArray;
 use src\TypeQualifier;
 
@@ -16,25 +17,31 @@ class HashTable extends Type
         $this->Object = &$Array->Array;
     }
 
-    public function insert(ObjectArray $Array, $value, $index = null): void
+    public function insert($value, $index = null): void
     {
-        $Array->Array->add($index, $value);
+        $this->Object->add($value, $index);
     }
 
     public function validation($value, $index, $type, $indexType, TypeQualifier $Qualifier): void
     {
         if ($Qualifier->compareIndexType($index) === false || is_null($Qualifier->compareIndexType($index))) {
-            throw new AssociateArrayKeyException("Созданный массив не может записать индекс переданного типа {$indexType} так как объект создан для типа индекса {$Qualifier->indexType}");
+            throw new AssociateArrayKeyException(ExceptionMessages::parse(
+                [$indexType, $Qualifier->indexType],
+                ExceptionMessages::$message['common']['insertIndexType']
+            ));
         }
     }
 
     public function delete($index): ?object
     {
-        if(gettype($index) == 'string') {
+        if ($type = gettype($index) == 'string') {
             $this->Object->offsetUnset($index);
             return $this;
         } else {
-            throw new AssociateArrayKeyException('Для удаления по индексу необходимо использовать тип передаваемого значения string');
+            throw new AssociateArrayKeyException(ExceptionMessages::parse(
+                [$type],
+                ExceptionMessages::$message['common']['deleteIndexType']
+            ));
         }
 
     }
@@ -58,10 +65,31 @@ class HashTable extends Type
 
     public function offsetExist($index): ?bool
     {
-        if(gettype($index) == 'string') {
+        if ($type = gettype($index) == 'string') {
             return $this->Object->offsetExists($index);
         } else {
-            throw new AssociateArrayKeyException('Для нахождения элемента по индексу необходимо использовать тип передаваемого значения string');
+            throw new AssociateArrayKeyException(ExceptionMessages::parse(
+                [$type],
+                ExceptionMessages::$message['common']['existIndexType']
+            ));
         }
     }
+
+    public function count(): ?int
+    {
+        return $this->Object->getCountElements();
+    }
+
+    public function valueByKey($key)
+    {
+        if ($type = gettype($key) == 'string') {
+            return $this->Object->valueByKey($key);
+        } else {
+            throw new AssociateArrayKeyException(ExceptionMessages::parse(
+                [$type],
+                ExceptionMessages::$message['common']['existIndexType']
+            ));
+        }
+    }
+
 }

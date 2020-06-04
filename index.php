@@ -13,9 +13,9 @@ $arr1 = new ObjectArray("string", "array");
 
 $f = new AssociateArray();
 
-$arr1->insert([1,23,4], 's1');
+$arr1->insert([1,23,4], "s1");
 $arr1->insert([1,23,5], 's2');
-$arr1->insert([1,23,5], 1);
+$arr1->insert([1,23,5], 's3');
 
 //$obj->insert($arr);
 $obj->insert($f);
@@ -24,15 +24,23 @@ $obj->insert($f);
 
 
 //валидация для удаления и проверки на ключ
-$arr1->delete(1);
-$obj->delete(1);
+//$arr1->delete(1);
+//$obj->delete("string");
 
 //$a = $arr1->keyExist(1);
 //$b = $obj->keyExist('s5');
 //var_dump($a, $b);
 
-$array = $obj->getAsAnArray();
-$array1 = $arr1->getAsAnArray();
+//$array = $obj->getAsAnArray();
+//$array1 = $arr1->getAsAnArray();
+
+//$a = $obj->count();
+//$b = $arr1->count();
+
+//$a = $obj->getValueByKey(6);
+//$b = $arr1->getValueByKey('s2');
+//var_dump($a, $b);
+
 
 //$obj->insert($f);
 //$obj->insert($f);

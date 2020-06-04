@@ -10,7 +10,7 @@ abstract class Type implements InterfaceType
 {
     public $Object;
 
-    abstract public function insert(ObjectArray $Array, $value , $index = null): void;
+    abstract public function insert($value , $index = null): void;
 
     abstract public function validation($value, $index, $type, $indexType, TypeQualifier $Qualifier): void;
 
@@ -23,4 +23,8 @@ abstract class Type implements InterfaceType
     abstract public function getFirstElement(): ?object;
 
     abstract public function offsetExist($index): ?bool;
+
+    abstract public function count(): ?int;
+
+    abstract public function valueByKey($key);
 }

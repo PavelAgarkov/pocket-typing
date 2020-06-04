@@ -7,7 +7,7 @@ use src\TypeQualifier;
 
 interface InterfaceType
 {
-    public function insert(ObjectArray $Array, $value , $index = null): void;
+    public function insert($value , $index = null): void;
 
     public function validation($value, $index, $type, $indexType, TypeQualifier $Qualifier): void;
 
@@ -20,4 +20,9 @@ interface InterfaceType
     public function getFirstElement(): ?object;
 
     public function offsetExist($index): ?bool;
+
+    public function count(): ?int;
+
+    public function valueByKey($key);
+
 }

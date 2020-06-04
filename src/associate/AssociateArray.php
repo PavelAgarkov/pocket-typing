@@ -3,6 +3,7 @@
 namespace src\associate;
 
 use src\exceptions\AssociateArrayKeyException;
+use src\exceptions\ExceptionMessages;
 
 class AssociateArray
 {
@@ -15,7 +16,7 @@ class AssociateArray
         $this->AssociateList = array();
     }
 
-    public function add($index, $value): void
+    public function add($value, $index): void
     {
         $this->AssociateList[$index] = $value;
         $this->count++;
@@ -41,7 +42,7 @@ class AssociateArray
         if(array_key_exists($index, $this->AssociateList)) {
             unset($this->AssociateList[$index]);
         } else {
-            throw new AssociateArrayKeyException('В ключах массива нет переданного аргумента');
+            throw new AssociateArrayKeyException(ExceptionMessages::$message['common']['indexExist']);
         }
     }
 
@@ -50,5 +51,14 @@ class AssociateArray
         if (array_key_exists($index, $this->AssociateList))
             return true;
         else return false;
+    }
+
+    public function valueByKey($key)
+    {
+        if(array_key_exists($key, $this->AssociateList)) {
+            return $this->AssociateList[$key];
+        } else {
+            throw new AssociateArrayKeyException(ExceptionMessages::$message['common']['indexExist']);
+        }
     }
 }
